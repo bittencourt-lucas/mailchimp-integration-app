@@ -30,7 +30,7 @@ This project was developed by Lucas Bittencourt.
 
 ### Run the app locally
 
-`uvicorn app.main:app --host localhost --port 3000`
+`uvicorn main:app --host localhost --port 3000`
 
 ### Development tools
 
