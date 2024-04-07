@@ -1,4 +1,4 @@
-from app.shared.infra.http.main import app
+from main import app
 
 
 def test_app_exists():
