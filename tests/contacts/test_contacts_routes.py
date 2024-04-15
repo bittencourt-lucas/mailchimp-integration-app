@@ -1,4 +1,4 @@
-from src.routers.contacts_routes import contacts_router
+from app.contacts.endpoints.routes.contacts_routes import contacts_router
 from fastapi import APIRouter
 
 

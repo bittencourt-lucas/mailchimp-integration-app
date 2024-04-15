@@ -4,12 +4,6 @@ This repository has a FastAPI implementation of the MailChimp Technical Challeng
 
 This project was developed by Lucas Bittencourt.
 
-## Create the .env file before anything else
-
-The project provides a .env.example to follow good practices, but to make anything work, it's necessary to create a .env file with the following environment variables
-
-> MOCKAPI_BASE_URL=https://challenge.trio.dev/api/v1
-
 ## Instructions to run the app using Docker (recommended)
 
 ### Build the Docker image
@@ -40,6 +34,6 @@ The project provides a .env.example to follow good practices, but to make anythi
 
 ### Development tools
 
-Run the linter: `flake8`
+Run the linter: `flake8 ./app`
 
 Run the tests: `pytest`

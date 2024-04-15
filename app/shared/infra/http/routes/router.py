@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .contacts_routes import contacts_router
+from app.contacts.endpoints.routes.contacts_routes import contacts_router
 
 
 root_router = APIRouter()
