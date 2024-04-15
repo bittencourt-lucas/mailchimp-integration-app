@@ -1,4 +1,4 @@
-from app.shared.infra.http.routes.router import root_router
+from routers.router import root_router
 from fastapi import APIRouter
 
 
