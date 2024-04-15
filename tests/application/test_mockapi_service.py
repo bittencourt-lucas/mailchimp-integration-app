@@ -3,15 +3,34 @@ import pytest
 from src.application.services.mockapi_service import MockAPIService
 
 
+def test_format_contacts():
+    service = MockAPIService()
+    contacts = [{
+            'createdAt': '2022-02-18T16:32:23.057Z',
+            'firstName': 'John',
+            'lastName': 'Doe',
+            'email': 'johndoe@outlook.com',
+            'avatar': 'https://cdn.fakercloud.com/avatars/dshster_128.jpg',
+            'id': '115'
+        }]
+
+    expected_output = [{
+            'firstName': 'John',
+            'lastName': 'Doe',
+            'email': 'johndoe@outlook.com'
+        }]
+
+    output = service.format_contacts(contacts)
+    assert output == expected_output
+
+
 @pytest.mark.asyncio
 async def test_mockapi_service_get_contacts(mocker):
-    mock_response = {
-        'status_code': 200,
-        'data': [{
-            'name': 'John Doe',
-            'email': 'johndoe@email.com'
-            }]
-        }
+    mock_response = [{
+            'firstName': 'John',
+            'lastName': 'Doe',
+            'email': 'johndoe@outlook.com'
+        }]
 
     mock_get = mocker.patch('httpx.AsyncClient.get')
     mock_get.return_value = mocker.Mock(status_code=200)
