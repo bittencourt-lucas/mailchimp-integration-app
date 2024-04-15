@@ -1,4 +1,4 @@
-from routers.router import root_router
+from src.routers.router import root_router
 from fastapi import APIRouter
 
 
