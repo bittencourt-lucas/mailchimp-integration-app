@@ -7,10 +7,10 @@ from src.application.services.mockapi.get_contacts_service \
 @pytest.mark.asyncio
 async def test_get_contacts_service(mocker):
     mock_response = [{
-            'firstName': 'John',
-            'lastName': 'Doe',
-            'email': 'johndoe@outlook.com'
-        }]
+        'firstName': 'John',
+        'lastName': 'Doe',
+        'email': 'johndoe@outlook.com'
+    }]
 
     mock_get = mocker.patch('httpx.AsyncClient.get')
     mock_get.return_value = mocker.Mock(status_code=200)
