@@ -1,7 +1,7 @@
 import httpx
 
 
-class HttpxClient:
+class HttpClient:
     def __init__(self):
         self.client = httpx.AsyncClient()
 

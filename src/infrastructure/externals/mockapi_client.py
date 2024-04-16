@@ -1,12 +1,19 @@
 import os
 from dotenv import load_dotenv
-from src.infrastructure.clients.httpx_client import HttpxClient
+from src.infrastructure.clients.http_client import HttpClient
 
 
-class MockAPIService:
+class MockAPIClient:
     def __init__(self):
         load_dotenv()
+
         self.base_url = os.getenv("MOCKAPI_BASE_URL")
+        if not self.base_url:
+            raise ValueError("MOCKAPI_BASE_URL is not set")
+
+        self.client = HttpClient()
+        self.client.set_url(self.base_url)
+        self.client.set_headers({'Content-Type': 'application/json'})
 
     def format_contacts(self, contacts):
         return [
@@ -19,12 +26,6 @@ class MockAPIService:
         ]
 
     async def get_contacts(self):
-        if not self.base_url:
-            raise ValueError("MOCKAPI_BASE_URL is not set")
-        client = HttpxClient()
-        client.set_url(self.base_url)
-        client.set_headers({'Content-Type': 'application/json'})
-        response = await client.get('/contacts')
-        await client.close()
-
+        response = await self.client.get('/contacts')
+        await self.client.close()
         return self.format_contacts(response)

@@ -1,12 +1,19 @@
 import os
-from src.infrastructure.clients.httpx_client import HttpxClient
+from src.infrastructure.clients.http_client import HttpClient
 
 
-class MailchimpClient():
+class MailchimpHttpClient():
     def __init__(self):
-        self.client = HttpxClient()
+        self.client = HttpClient()
+
         self.base_url = os.getenv('MAILCHIMP_BASE_URL')
+        if not self.base_url:
+            raise ValueError('MAILCHIMP_BASE_URL is not set')
+
         self.api_key = os.getenv('MAILCHIMP_API_KEY')
+        if not self.api_key:
+            raise ValueError('MAILCHIMP_API_KEY is not set')
+
         self.client.set_url(self.base_url)
         self.client.set_headers({'Authorization': f'Bearer {self.api_key}'})
 
