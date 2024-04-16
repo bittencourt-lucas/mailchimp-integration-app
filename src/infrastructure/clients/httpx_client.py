@@ -1,7 +1,7 @@
 import httpx
 
 
-class HttpClient:
+class HttpxClient:
     def __init__(self):
         self.client = httpx.AsyncClient()
 
@@ -14,7 +14,7 @@ class HttpClient:
     async def get(self, endpoint):
         try:
             response = await self.client.get(
-                f'${self.url}/${endpoint}',
+                f'{self.url}{endpoint}',
                 headers=self.headers
                 )
             return response.json()
@@ -22,10 +22,10 @@ class HttpClient:
             print(f'Error: {e}')
             return None
 
-    async def post(self, endpoint, json=None):
+    async def post(self, endpoint, json):
         try:
             response = await self.client.post(
-                f'${self.url}/${endpoint}',
+                f'{self.url}{endpoint}',
                 headers=self.headers,
                 json=json
                 )

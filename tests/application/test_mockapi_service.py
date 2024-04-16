@@ -44,6 +44,7 @@ async def test_mockapi_service_get_contacts(mocker):
     contacts = await service.get_contacts()
 
     mock_get.assert_called_once_with(
-        f"{os.environ.get('MOCKAPI_BASE_URL')}/contacts"
+        f"{os.environ.get('MOCKAPI_BASE_URL')}/contacts",
+        headers={'Content-Type': 'application/json'}
         )
     assert contacts == mock_response

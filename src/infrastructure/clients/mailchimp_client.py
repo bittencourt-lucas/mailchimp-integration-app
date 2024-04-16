@@ -1,10 +1,10 @@
 import os
-from src.infrastructure.clients.httpx_client import HttpClient
+from src.infrastructure.clients.httpx_client import HttpxClient
 
 
 class MailchimpClient():
     def __init__(self):
-        self.client = HttpClient()
+        self.client = HttpxClient()
         self.base_url = os.getenv('MAILCHIMP_BASE_URL')
         self.api_key = os.getenv('MAILCHIMP_API_KEY')
         self.client.set_url(self.base_url)
@@ -18,7 +18,7 @@ class MailchimpClient():
             print(f'Error: {e}')
             return None
 
-    async def post(self, endpoint, json=None):
+    async def post(self, endpoint, json):
         try:
             response = await self.client.post(endpoint=endpoint, json=json)
             return response

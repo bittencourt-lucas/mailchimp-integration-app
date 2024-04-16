@@ -1,6 +1,6 @@
 import os
-import httpx
 from dotenv import load_dotenv
+from src.infrastructure.clients.httpx_client import HttpxClient
 
 
 class MockAPIService:
@@ -21,11 +21,10 @@ class MockAPIService:
     async def get_contacts(self):
         if not self.base_url:
             raise ValueError("MOCKAPI_BASE_URL is not set")
+        client = HttpxClient()
+        client.set_url(self.base_url)
+        client.set_headers({'Content-Type': 'application/json'})
+        response = await client.get('/contacts')
+        await client.close()
 
-        url = f"{self.base_url}/contacts"
-        async with httpx.AsyncClient() as client:
-            response = await client.get(url)
-            if response.status_code == 200:
-                return self.format_contacts(response.json())
-            else:
-                return None
+        return self.format_contacts(response)
