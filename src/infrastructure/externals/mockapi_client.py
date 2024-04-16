@@ -7,9 +7,9 @@ class MockAPIClient:
     def __init__(self):
         load_dotenv()
 
-        self.base_url = os.getenv("MOCKAPI_BASE_URL")
+        self.base_url = os.getenv('MOCKAPI_BASE_URL')
         if not self.base_url:
-            raise ValueError("MOCKAPI_BASE_URL is not set")
+            raise ValueError('MOCKAPI_BASE_URL is not set')
 
         self.client = HttpClient()
         self.client.set_url(self.base_url)
