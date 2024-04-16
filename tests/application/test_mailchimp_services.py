@@ -30,8 +30,8 @@ async def test_create_list_service(mocker):
     response = await service.execute(mock_request)
 
     mock_post.assert_called_once_with(
-        f'{os.environ.get("MAILCHIMP_BASE_URL")}/lists',
-        headers={'Authorization': f'Bearer {os.getenv("MAILCHIMP_API_KEY")}'},
+        f'{os.environ.get('MAILCHIMP_BASE_URL')}/lists',
+        headers={'Authorization': f'Bearer {os.getenv('MAILCHIMP_API_KEY')}'},
         json=mock_request,
     )
     assert response == mock_response
@@ -62,8 +62,8 @@ async def test_get_list_members_info_service(mocker):
     response = await service.execute(list_id)
 
     mock_get.assert_called_once_with(
-        f'{os.environ.get("MAILCHIMP_BASE_URL")}/lists/{list_id}/members',
-        headers={'Authorization': f'Bearer {os.getenv("MAILCHIMP_API_KEY")}'},
+        f'{os.environ.get('MAILCHIMP_BASE_URL')}/lists/{list_id}/members',
+        headers={'Authorization': f'Bearer {os.getenv('MAILCHIMP_API_KEY')}'},
     )
     assert response == mock_response
 
@@ -96,8 +96,8 @@ async def test_add_members_to_list_service(mocker):
     response = await service.execute(list_id, mock_request)
 
     mock_post.assert_called_once_with(
-        f'{os.environ.get("MAILCHIMP_BASE_URL")}/lists/{list_id}/members',
-        headers={'Authorization': f'Bearer {os.getenv("MAILCHIMP_API_KEY")}'},
+        f'{os.environ.get('MAILCHIMP_BASE_URL')}/lists/{list_id}/members',
+        headers={'Authorization': f'Bearer {os.getenv('MAILCHIMP_API_KEY')}'},
         json=mock_request,
     )
     assert response == mock_response
