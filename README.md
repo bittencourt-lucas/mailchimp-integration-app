@@ -9,6 +9,12 @@ This project was developed by Lucas Bittencourt.
 The project provides a .env.example to follow good practices, but to make anything work, it's necessary to create a .env file with the following environment variables
 
 > MOCKAPI_BASE_URL=https://challenge.trio.dev/api/v1
+>
+> MAILCHIMP_API_KEY=7cda141bb55b4455c292b50c80dda1b2-us18
+>
+> MAILCHIMP_SERVER_PREFIX=us18
+>
+> MAILCHIMP_API_BASE_URL=https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0
 
 ## Instructions to run the app using Docker (recommended)
 
