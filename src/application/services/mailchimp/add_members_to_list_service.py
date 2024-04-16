@@ -7,5 +7,14 @@ class AddMembersToListService:
         self.client = MailchimpAPIClient()
 
     async def execute(self, list_id, members):
-        response = await self.client.add_members_to_list(list_id, members)
-        return response
+        added_members = []
+        for member in members:
+            response = await self.client.add_members_to_list(list_id, member)
+            if response['id']:
+                added_members.append({
+                    'firstName': member['merge_fields']['FNAME'],
+                    'lastName': member['merge_fields']['LNAME'],
+                    'email': member['email_address'],
+                })
+        await self.client.close()
+        return added_members

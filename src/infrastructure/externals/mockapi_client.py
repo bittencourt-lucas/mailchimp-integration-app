@@ -27,5 +27,7 @@ class MockAPIClient:
 
     async def get_contacts(self):
         response = await self.client.get('/contacts')
-        await self.client.close()
         return self.format_contacts(response)
+
+    async def close(self):
+        await self.client.close()

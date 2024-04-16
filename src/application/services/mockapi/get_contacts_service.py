@@ -6,4 +6,6 @@ class GetContactsService:
         self.client = MockAPIClient()
 
     async def execute(self):
-        return await self.client.get_contacts()
+        contacts = await self.client.get_contacts()
+        await self.client.close()
+        return contacts
