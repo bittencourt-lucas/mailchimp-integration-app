@@ -28,9 +28,9 @@ async def test_sync_contacts(mocker):
     }
 
     mocker.patch.dict(os.environ, {
+        'MOCKAPI_BASE_URL': 'https://challenge.trio.dev/api/v1',
         'MAILCHIMP_API_KEY': 'test_api',
         'MAILCHIMP_API_BASE_URL': 'https://us1.api.mailchimp.com/3.0',
-        'MOCKAPI_BASE_URL': 'https://challenge.trio.dev/api/v1'
         })
 
     mock_get_contacts = mocker.patch(
@@ -66,6 +66,10 @@ async def test_sync_contacts(mocker):
             'LNAME': 'User'
         },
     }]
+
+    mock_get = mocker.patch('httpx.AsyncClient.get')
+    mock_get.return_value = mocker.Mock(status_code=200)
+    mock_get.return_value.json.return_value = mock_response
 
     response = client.get("/contacts/sync")
 
