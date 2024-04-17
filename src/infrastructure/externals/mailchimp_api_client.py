@@ -1,28 +1,30 @@
-from src.infrastructure.clients.mailchimp_client import MailchimpHttpClient
+import os
+from src.infrastructure.clients.http_client import HttpClient
 
 
 class MailchimpAPIClient:
     def __init__(self):
-        self.client = MailchimpHttpClient()
+        self.client = HttpClient()
 
-    async def create_list(self, data):
-        try:
-            response = await self.client.post(
-                endpoint='/lists',
-                json=data
-            )
-            await self.client.close()
-            return response
-        except Exception as e:
-            print(f'Error: {e}')
-            return None
+        self.base_url = os.getenv('MAILCHIMP_API_BASE_URL')
+        if not self.base_url:
+            raise ValueError('MAILCHIMP_API_BASE_URL is not set')
 
-    async def get_list_members_info(self, list_id):
+        self.api_key = os.getenv('MAILCHIMP_API_KEY')
+        if not self.api_key:
+            raise ValueError('MAILCHIMP_API_KEY is not set')
+
+        self.client.set_url(self.base_url)
+        self.client.set_headers({
+            'Authorization': f'Bearer {self.api_key}',
+            'Content-Type': 'application/json'
+            })
+
+    async def get_lists(self):
         try:
             response = await self.client.get(
-                endpoint=f'/lists/{list_id}/members'
+                endpoint='/lists'
             )
-            await self.client.close()
             return response
         except Exception as e:
             print(f'Error: {e}')
@@ -34,8 +36,10 @@ class MailchimpAPIClient:
                 endpoint=f'/lists/{list_id}/members',
                 json=data
             )
-            await self.client.close()
             return response
         except Exception as e:
             print(f'Error: {e}')
             return None
+
+    async def close(self):
+        await self.client.close()
