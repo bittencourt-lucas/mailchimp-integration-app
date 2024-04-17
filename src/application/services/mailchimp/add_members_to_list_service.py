@@ -8,13 +8,22 @@ class AddMembersToListService:
 
     async def execute(self, list_id, members):
         added_members = []
-        for member in members:
-            response = await self.client.add_members_to_list(list_id, member)
-            if response['id']:
-                added_members.append({
-                    'firstName': member['merge_fields']['FNAME'],
-                    'lastName': member['merge_fields']['LNAME'],
-                    'email': member['email_address'],
-                })
-        await self.client.close()
-        return added_members
+
+        try:
+            for member in members:
+                response = await self.client.add_members_to_list(
+                    list_id,
+                    member
+                    )
+                if response['id']:
+                    added_members.append({
+                        'firstName': member['merge_fields']['FNAME'],
+                        'lastName': member['merge_fields']['LNAME'],
+                        'email': member['email_address'],
+                    })
+            await self.client.close()
+            return added_members
+        except Exception as e:
+            print(f'Error: {e}')
+            await self.client.close()
+            return None

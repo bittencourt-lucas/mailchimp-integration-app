@@ -7,6 +7,11 @@ class GetListsService:
         self.client = MailchimpAPIClient()
 
     async def execute(self):
-        response = await self.client.get_lists()
-        await self.client.close()
-        return response
+        try:
+            response = await self.client.get_lists()
+            await self.client.close()
+            return response
+        except Exception as e:
+            print(f'Error: {e}')
+            await self.client.close()
+            return None
