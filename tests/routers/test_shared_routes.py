@@ -1,3 +1,4 @@
+import os
 import pytest
 from fastapi import APIRouter
 from fastapi.testclient import TestClient
@@ -25,6 +26,12 @@ async def test_sync_contacts(mocker):
             },
         }]
     }
+
+    mocker.patch.dict(os.environ, {
+        'MAILCHIMP_API_KEY': 'test_api',
+        'MAILCHIMP_API_BASE_URL': 'https://us1.api.mailchimp.com/3.0',
+        'MOCKAPI_BASE_URL': 'https://challenge.trio.dev/api/v1'
+        })
 
     mock_get_contacts = mocker.patch(
         'src.application.services.mockapi.get_contacts_service.'
