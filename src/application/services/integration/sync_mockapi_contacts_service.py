@@ -65,7 +65,9 @@ class SyncMockApiMailchimpService:
             'email': f'Lucas.Bittencourt{random_number}@trio.email'
         }
 
-    def format_contacts(self, contacts) -> List[MailchimpContact]:
+    def format_contacts(self,
+                        contacts: List[MockAPIContact]
+                        ) -> List[MailchimpContact]:
         """
         Format contacts to match Mailchimp's required structure.
 

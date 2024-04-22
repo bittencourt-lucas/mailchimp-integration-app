@@ -28,7 +28,7 @@ class AddMembersToListService:
                         list_id,
                         member
                         )
-                if response['email']:
+                if len(response) > 0:
                     added_members.append({
                         'firstName': member['merge_fields']['FNAME'],
                         'lastName': member['merge_fields']['LNAME'],
