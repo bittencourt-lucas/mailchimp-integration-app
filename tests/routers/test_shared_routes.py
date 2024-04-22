@@ -16,15 +16,18 @@ def test_root_router_exists():
 @pytest.mark.asyncio
 async def test_sync_contacts(mocker):
     mock_response = {
-        'synced_contacts': 1,
-        'contacts': [{
-            'email_address': 'test@email.com',
-            'status': 'subscribed',
-            'merge_fields': {
-                'FNAME': 'Test',
-                'LNAME': 'User'
-            },
-        }]
+        'success': True,
+        'data': {
+            'synced_contacts': 1,
+            'contacts': [{
+                'email_address': 'test@email.com',
+                'status': 'subscribed',
+                'merge_fields': {
+                    'FNAME': 'Test',
+                    'LNAME': 'User'
+                },
+            }]
+        }
     }
 
     mocker.patch.dict(os.environ, {

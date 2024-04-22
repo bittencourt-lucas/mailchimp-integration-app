@@ -59,12 +59,14 @@ async def test_add_members_to_list_exception(mocker):
         })
 
     mock_post = mocker.patch('httpx.AsyncClient.post')
-    mock_post.side_effect = Exception('Test')
+    mock_post.side_effect = ConnectionError(
+        'Error with POST request on HTTP Client'
+        )
 
     service = AddMembersToListService()
-    response = await service.execute(list_id, mock_request)
 
-    assert response is None
+    with pytest.raises(ConnectionError):
+        await service.execute(list_id, mock_request)
 
 
 @pytest.mark.asyncio
@@ -107,6 +109,6 @@ async def test_mailchimp_api_get_lists_exception(mocker):
     mock_get.side_effect = Exception('Test')
 
     service = GetListsService()
-    response = await service.execute()
 
-    assert response is None
+    with pytest.raises(ConnectionError):
+        await service.execute()

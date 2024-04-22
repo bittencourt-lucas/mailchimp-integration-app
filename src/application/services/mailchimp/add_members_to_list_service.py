@@ -1,3 +1,4 @@
+import logging
 from src.infrastructure.externals.mailchimp_api_client \
     import MailchimpAPIClient
 
@@ -24,6 +25,6 @@ class AddMembersToListService:
             await self.client.close()
             return added_members
         except Exception as e:
-            print(f'Error: {e}')
+            logging.error(f'Error: {e}')
             await self.client.close()
-            return None
+            raise ConnectionError('Error adding members to list')

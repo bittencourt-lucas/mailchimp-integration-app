@@ -1,4 +1,5 @@
 import httpx
+import logging
 
 
 class HttpClient:
@@ -19,8 +20,8 @@ class HttpClient:
                 )
             return response.json()
         except Exception as e:
-            print(f'Error: {e}')
-            return None
+            logging.error(f'Error: {e}')
+            raise ConnectionError('Error with GET request on HTTP Client')
 
     async def post(self, endpoint, json):
         try:
@@ -31,8 +32,8 @@ class HttpClient:
                 )
             return response.json()
         except Exception as e:
-            print(f'Error: {e}')
-            return None
+            logging.error(f'Error: {e}')
+            raise ConnectionError('Error with POST request on HTTP Client')
 
     async def close(self):
         await self.client.aclose()

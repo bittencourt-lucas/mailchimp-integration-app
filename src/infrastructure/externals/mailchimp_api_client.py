@@ -1,4 +1,5 @@
 import os
+import logging
 from src.infrastructure.clients.http_client import HttpClient
 
 
@@ -27,8 +28,8 @@ class MailchimpAPIClient:
             )
             return response
         except Exception as e:
-            print(f'Error: {e}')
-            return None
+            logging.error(f'Error: {e}')
+            raise ConnectionError('Error getting lists from MailChimp')
 
     async def add_members_to_list(self, list_id, data):
         try:
@@ -38,8 +39,8 @@ class MailchimpAPIClient:
             )
             return response
         except Exception as e:
-            print(f'Error: {e}')
-            return None
+            logging.error(f'Error: {e}')
+            raise ConnectionError('Error posting data to MailChimp')
 
     async def close(self):
         await self.client.close()
