@@ -1,6 +1,6 @@
-# Trio Challenge - MailChimp (FastAPI)
+# MailChimp Integration (FastAPI)
 
-This repository has a FastAPI implementation of the MailChimp Technical Challenge from Trio.
+This repository has a FastAPI implementation of a MailChimp Integration.
 
 This project was developed by Lucas Bittencourt.
 
@@ -20,11 +20,11 @@ The project provides a .env.example to follow good practices, but to make anythi
 
 ### Build the Docker image
 
-`docker build -t trio-challenge-mailchimp .`
+`docker build -t mailchimp-integration-app.`
 
 ### Run the Docker container
 
-`docker run -d -p 3000:3000 trio-challenge-mailchimp`
+`docker run -d -p 3000:3000 mailchimp-integration-app`
 
 ## Instructions to run the app locally
 
