@@ -10,7 +10,7 @@ The project provides a .env.example to follow good practices, but to make anythi
 
 > MOCKAPI_BASE_URL=https://challenge.trio.dev/api/v1
 >
-> MAILCHIMP_API_KEY=7cda141bb55b4455c292b50c80dda1b2-us18
+> MAILCHIMP_API_KEY=************************-us18
 >
 > MAILCHIMP_SERVER_PREFIX=us18
 >
